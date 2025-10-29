@@ -1,4 +1,3 @@
-// Router/cont.js
 import express from "express";
 import { Contact } from "../db.js";
 
@@ -25,5 +24,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-// ✅ This line is critical
 export default router;
