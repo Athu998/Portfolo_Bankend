@@ -1,0 +1,18 @@
+{
+  "name": "contact_me",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-sessions": "^1.0.6",
+    "mongoose": "^8.19.2",
+    "nodemailer": "^7.0.10",
+    "router": "^2.2.0"
+  }
+}
