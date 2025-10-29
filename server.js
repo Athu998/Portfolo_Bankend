@@ -4,27 +4,30 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Import router
-const contactRouter = require('./Router/cont');
-
-// ✅ Middleware
-app.use(cors({
-  origin: '*', // You can replace '*' with your portfolio domain for better security
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
-}));
-app.use(express.urlencoded({ extended: true }));
+// Middleware
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// ✅ Routes
-app.use('/contact', contactRouter);
+// Import your contact route if exists
+try {
+  const contactRouter = require('./Router/cont');
+  app.use('/contact', contactRouter);
+} catch (err) {
+  console.log('⚠️ Contact route not found, continuing without it.');
+}
 
-// ✅ Default route
+// Default route for Railway health check
 app.get('/', (req, res) => {
-  res.send('🚀 Portfolio Backend Running Successfully!');
+  res.status(200).send('🚀 Portfolio Backend Running Successfully!');
 });
 
-// ✅ Start Server
+// Catch-all for undefined routes
+app.use((req, res) => {
+  res.status(404).send('❌ Route not found');
+});
+
+// Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
 });
