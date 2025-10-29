@@ -1,6 +1,7 @@
 {
   "name": "contact_me",
   "version": "1.0.0",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -13,7 +14,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "express-sessions": "^1.0.1",
+    "express-session": "^1.17.3",
     "mongoose": "^8.19.2",
     "nodemailer": "^7.0.10",
     "router": "^2.2.0"

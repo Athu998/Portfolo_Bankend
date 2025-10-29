@@ -10,23 +10,35 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Default route for Railway health check
+// ✅ Home route — for Railway health check
 app.get("/", (req, res) => {
-  res.status(200).send("🚀 Portfolio Backend Running Successfully! 🌐");
+  res.status(200).send("🚀 Portfolio Backend Running Successfully on Railway!");
 });
 
-// ✅ Example contact POST route (for testing form submission)
-app.post("/contact", (req, res) => {
-  console.log("📩 New Contact Submission:", req.body);
-  res.status(200).json({ success: true, message: "Message received successfully!" });
+// ✅ Contact route — handles your form submission
+app.post("/contact", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    console.log("📩 Contact Received:", { name, email, message });
+
+    // You can add MongoDB save logic here later if needed
+    res.status(200).json({
+      success: true,
+      message: "✅ Thank you! Your message has been received successfully.",
+    });
+  } catch (err) {
+    console.error("❌ Error processing contact form:", err);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
 });
 
-// ✅ Catch-all for invalid routes
+// ✅ Catch-all route for safety
 app.use((req, res) => {
   res.status(404).json({ error: "❌ Route not found" });
 });
 
-// ✅ Start the server
+// ✅ Start the server — this line is key for Railway
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT}`);
 });
