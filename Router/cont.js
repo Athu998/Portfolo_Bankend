@@ -1,7 +1,7 @@
 // Router/cont.js
 const express = require('express');
-const Contact = require('../db'); // ✅ Import model
-const { redirect } = require('next/dist/server/api-utils');
+const Contact = require('../db'); 
+//const { redirect } = require('next/dist/server/api-utils');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
