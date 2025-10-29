@@ -1,31 +1,17 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-// Connect to MongoDB
-mongoose.connect(
-  'mongodb+srv://atharva998:P%40ss1word@cluster0.fd5qknm.mongodb.net/GetData?retryWrites=true&w=majority&appName=Cluster0',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-)
-.then(() => console.log('✅ Connected to MongoDB'))
-.catch((err) => console.error('❌ Error connecting to MongoDB:', err));
+const MONGO_URI =
+  "mongodb+srv://atharva998:P%40ss1word@cluster0.fd5qknm.mongodb.net/GetData?retryWrites=true&w=majority&appName=Cluster0";
 
-// Contact Schema
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ Error connecting to MongoDB:", err));
+
 const contactSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true },
-  message: { type: String, required: true },
+  name: String,
+  email: String,
+  message: String,
 });
 
-// Admin Schema
-// const adminSchema = new mongoose.Schema({
-//   username: { type: String, required: true },
-//   password: { type: String, required: true },
-// });
-
-// Models
-const Contact = mongoose.model('Contact', contactSchema);
-// const Admin = mongoose.model('Admin', adminSchema);
-
-//module.exports = { Contact, Admin };
+export const Contact = mongoose.model("Contact", contactSchema);

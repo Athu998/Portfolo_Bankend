@@ -1,27 +1,29 @@
 // Router/cont.js
-const express = require('express');
-const Contact = require('../db'); 
-//const { redirect } = require('next/dist/server/api-utils');
+import express from "express";
+import { Contact } from "../db.js";
+
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-  const {name, email, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Please fill all the fields' });
-  }
-
+router.post("/", async (req, res) => {
   try {
+    const { name, email, message } = req.body;
+
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: "Please fill all fields" });
+    }
+
     const newContact = new Contact({ name, email, message });
     await newContact.save();
-    res.status(201).json({ message: 'Contact message saved successfully' });
+
+    res.status(201).json({
+      success: true,
+      message: "✅ Contact message saved successfully!",
+    });
   } catch (err) {
-    console.error('❌ Error saving contact:', err);
-    res.status(500).json({ error: 'Error saving contact message' });
-  }
-  if(newContact.save()){
-    return redirect('/ThankyouPage.html')
+    console.error("❌ Error saving contact:", err);
+    res.status(500).json({ error: "Error saving contact message" });
   }
 });
 
-module.exports = router;
+// ✅ This line is critical
+export default router;
